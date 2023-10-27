@@ -467,10 +467,10 @@ const receiptUser = (req, res) => {
 
 //post method donate all things - user
 const donateAllItemsUser = (req, res) => {
-    const { userId, fullname, itemname, detail, quantity,
+    const { userId,uname, itemname, detail, quantity,
         address, city, pincode, datetime} = req.body
     const newdonateItems = new itemdonations({
-     userId, fullname, itemname, detail, quantity, address, city, 
+     userId, uname, itemname, detail, quantity, address, city, 
      pincode, datetime
     })
     newdonateItems.save()
@@ -524,6 +524,19 @@ const ViewItemDonationUser = (req, res) => {
 // }
 
 
+//view all item donations of users by admin
+const ViewItemDetailsAdmin = (req, res) => {
+    itemdonations.find().then((data) => {
+        if (data) {
+            res.status(200).json({
+                message: data,
+                status: true,
+                statusCode: 200
+            })
+        }
+    })
+}
+
 
 
 module.exports = {
@@ -533,5 +546,5 @@ module.exports = {
     editStaffs, addFunds, ViewFundAddedDetails,
     editFund, singleViewAdminFunds, deleteFund, getAccessFund,
     donateFundUser, getAccessFundUser, getSingleViewFundUser,
-     receiptUser,donateAllItemsUser,ViewItemDonationUser
+     receiptUser,donateAllItemsUser,ViewItemDonationUser,ViewItemDetailsAdmin
 }

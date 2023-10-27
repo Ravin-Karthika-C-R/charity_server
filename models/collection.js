@@ -82,7 +82,6 @@ const donatefunds = new mongoose.model("donatefunds", donateFundSchema)
 const itemsdonationSchema = new mongoose.Schema({
     userId:String,
     uname:String,
-    fullname:String,
     itemname:String,
     detail:String,
     quantity: Number,

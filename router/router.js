@@ -7,7 +7,7 @@ const { adminLogin, userLogin, userSignup, addMembers, addStaffs, ViewMemberDeta
         getAccessFundUser, 
         getSingleViewFundUser,
         receiptUser,donateAllItemsUser, ViewItemDonationUser,
-        ViewItemDetailsAdmin} = require('../controllers/logic')
+        ViewItemDetailsAdmin,ViewUserFundDetailsAdmin} = require('../controllers/logic')
 
 
 const router = new express.Router()
@@ -33,6 +33,7 @@ router.get('/landing/fund-access',getAccessFund)
 router.get('/fund-access-user',getAccessFundUser)
 router.get('/user-single-viewfund-detail/:id',getSingleViewFundUser)
 router.get('/admin/itemDonationDetails',ViewItemDetailsAdmin)
+router.get('/admin/userfundDonationDetails',ViewUserFundDetailsAdmin)
 
 router.get('/user/recipt/:userId',receiptUser)
 router.get('/user/itemDonationView/:userId',ViewItemDonationUser)

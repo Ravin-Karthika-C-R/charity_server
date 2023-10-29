@@ -278,9 +278,9 @@ const editStaffs = (req, res) => {
 //add fund form - admin
 
 const addFunds = (req, res) => {
-    const { image, title, description } = req.body
+    const { image, title, description, startdate, enddate } = req.body
     const newFunds = new funds({
-        image, title, description
+        image, title, description, startdate,enddate
     })
     newFunds.save()
     res.status(200).json({
@@ -310,12 +310,14 @@ const ViewFundAddedDetails = (req, res) => {
 //edit fund raiser by admin
 const editFund = (req, res) => {
     const { id } = req.params
-    const { image, title, description } = req.body
+    const { image, title, description, startdate, enddate } = req.body
     funds.findOne({ _id: id }).then(pdata => {
         if (pdata) {
             pdata.image = image
             pdata.title = title
             pdata.description = description
+            pdata.startdate=startdate
+            pdata.enddate=enddate
 
 
             pdata.save()
@@ -406,9 +408,9 @@ const getAccessFund = (req, res) => {
 
 
 const donateFundUser = (req, res) => {
-    const { fId, userId,uname,title,ph,email, fname, phone, amount, cardno, expdate, cvv } = req.body
+    const { fId, userId,uname,title,ph,email, amount, cardno, expdate, cvv,dt } = req.body
     const newdonateFunds = new donatefunds({
-        fId, userId,uname,title,ph,email, fname, phone, amount, cardno, expdate, cvv
+        fId, userId,uname,title,ph,email, amount, cardno, expdate, cvv,dt
     })
     newdonateFunds.save()
     res.status(200).json({
@@ -442,7 +444,7 @@ const getSingleViewFundUser = (req, res) => {
                 message: data,
                 status: true,
                 statusCode: 200,
-                title:data.data
+                title:data.title
 
             })
         }
@@ -457,7 +459,8 @@ const receiptUser = (req, res) => {
             res.status(200).json({
                 message: data,
                 status: true,
-                statusCode: 200
+                statusCode: 200,
+                dt:data.dt
             })
         }
     })
@@ -467,10 +470,10 @@ const receiptUser = (req, res) => {
 
 //post method donate all things - user
 const donateAllItemsUser = (req, res) => {
-    const { userId,uname, itemname, detail, quantity,
+    const { userId,uname,ph,email, itemname, detail, quantity,
         address, city, pincode, datetime} = req.body
     const newdonateItems = new itemdonations({
-     userId, uname, itemname, detail, quantity, address, city, 
+     userId, uname,ph,email, itemname, detail, quantity, address, city, 
      pincode, datetime
     })
     newdonateItems.save()
@@ -537,7 +540,18 @@ const ViewItemDetailsAdmin = (req, res) => {
     })
 }
 
-
+//view all fund donations of users by admin
+const ViewUserFundDetailsAdmin = (req, res) => {
+    donatefunds.find().then((data) => {
+        if (data) {
+            res.status(200).json({
+                message: data,
+                status: true,
+                statusCode: 200
+            })
+        }
+    })
+}
 
 module.exports = {
     adminLogin, userSignup, userLogin, addMembers, addStaffs,
@@ -546,5 +560,6 @@ module.exports = {
     editStaffs, addFunds, ViewFundAddedDetails,
     editFund, singleViewAdminFunds, deleteFund, getAccessFund,
     donateFundUser, getAccessFundUser, getSingleViewFundUser,
-     receiptUser,donateAllItemsUser,ViewItemDonationUser,ViewItemDetailsAdmin
+     receiptUser,donateAllItemsUser,ViewItemDonationUser,ViewItemDetailsAdmin,
+     ViewUserFundDetailsAdmin
 }

@@ -53,7 +53,9 @@ const fundSchema = new mongoose.Schema({
     userId:String,
     image:String,
     title:String,
-    description:String
+    description:String,
+    startdate:Date,
+    enddate:Date
 
 })
 const funds = new mongoose.model("funds", fundSchema)
@@ -72,6 +74,7 @@ const donateFundSchema = new mongoose.Schema({
     cardno: Number,
     expdate: String,
     cvv: Number,
+    dt:Date,
     transactions:[]
 
 })
@@ -82,6 +85,8 @@ const donatefunds = new mongoose.model("donatefunds", donateFundSchema)
 const itemsdonationSchema = new mongoose.Schema({
     userId:String,
     uname:String,
+    ph:Number,
+    email:String,
     itemname:String,
     detail:String,
     quantity: Number,
@@ -93,19 +98,5 @@ const itemsdonationSchema = new mongoose.Schema({
 })
 const itemdonations = new mongoose.model("itemdonations", itemsdonationSchema)
 
-const viewdonationsSchema =new mongoose.Schema({
-    did:String,
-    userId:String,
-    uname:String,
-    fname:String,
-    phone: Number,
-    amount: Number,
-    cardno: Number,
-    expdate: String,
-    cvv: Number,
-    title:String
 
-})
-const viewdonations = new mongoose.model("viewdonations", viewdonationsSchema)
-
-module.exports = { admins, users, members, funds, staffs, donatefunds,itemdonations,viewdonations}
+module.exports = { admins, users, members, funds, staffs, donatefunds,itemdonations}

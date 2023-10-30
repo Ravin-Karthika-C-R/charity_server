@@ -77,9 +77,9 @@ const userLogin = (req, res) => {
 //add members - admin
 
 const addMembers = (req, res) => {
-    const { mname, mimage, address, psw, adproof, idproof, description } = req.body
+    const { mname, mimage, address,phn, psw, adproof, idproof, description } = req.body
     const newMembers = new members({
-        mname, mimage, address, psw, adproof, idproof, description
+        mname, mimage, address,phn, psw, adproof, idproof, description
     })
     newMembers.save()
     res.status(200).json({
@@ -209,14 +209,14 @@ const singleViewMember = (req, res) => {
 //edit member - admin
 const editMembers = (req, res) => {
     const { id } = req.params
-    const { mname, mimage, address, psw, idproof, description } = req.body
+    const { mname, mimage,phn, address, psw, idproof, description } = req.body
     members.findOne({ _id: id }).then(pdata => {
         if (pdata) {
             pdata.mname = mname
             pdata.mimage = mimage
             pdata.address = address
             pdata.psw = psw
-            // pdata.adproof = adproof
+            pdata.phn = phn
             pdata.idproof = idproof
             pdata.description = description
 

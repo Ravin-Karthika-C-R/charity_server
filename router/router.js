@@ -37,6 +37,7 @@ router.get('/admin/userfundDonationDetails',ViewUserFundDetailsAdmin)
 
 router.get('/user/recipt/:userId',receiptUser)
 router.get('/user/itemDonationView/:userId',ViewItemDonationUser)
+// router.get('/user/profile/:userId',viewProfile)
 // router.get('/user/viewreceipt/:userId')
 
 

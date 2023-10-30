@@ -454,7 +454,7 @@ const getSingleViewFundUser = (req, res) => {
 //recipt user
 const receiptUser = (req, res) => {
     const { userId } = req.params
-    donatefunds.findOne({ userId}).then((data) => {
+    donatefunds.find({ userId}).then((data) => {
         if (data) {
             res.status(200).json({
                 message: data,
@@ -552,6 +552,22 @@ const ViewUserFundDetailsAdmin = (req, res) => {
         }
     })
 }
+
+
+//view user profile
+// const viewProfile = (req, res) => {
+//     const { userId } = req.params
+//     users.find({ userId }).then((data) => {
+//         if (data) {
+//             res.status(200).json({
+//                 message: data,
+//                 status: true,
+//                 statusCode: 200
+
+//             })
+//         }
+//     })
+// }
 
 module.exports = {
     adminLogin, userSignup, userLogin, addMembers, addStaffs,

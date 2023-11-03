@@ -42,7 +42,8 @@ const staffSchema = new mongoose.Schema({
     sname:String,
     loginid:String,
     phone:Number,
-    psw:String
+    psw:String,
+    email:String
 
 })
 const staffs = new mongoose.model("staffs", staffSchema)

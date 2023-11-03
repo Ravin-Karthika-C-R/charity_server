@@ -92,9 +92,9 @@ const addMembers = (req, res) => {
 //add staffs - admin
 
 const addStaffs = (req, res) => {
-    const { sname, loginid, phone, psw } = req.body
+    const { sname, loginid, phone, email } = req.body
     const newStaffs = new staffs({
-        sname, loginid, phone, psw
+        sname, loginid, phone, email
     })
     newStaffs.save()
     res.status(200).json({
@@ -256,12 +256,13 @@ const singleViewStaff = (req, res) => {
 //edit staff - admin
 const editStaffs = (req, res) => {
     const { id } = req.params
-    const { sname, loginid, phone, psw } = req.body
+    const { sname, loginid, phone,email, psw } = req.body
     staffs.findOne({ _id: id }).then(pdata => {
         if (pdata) {
             pdata.sname = sname
             pdata.loginid = loginid
             pdata.phone = phone
+            pdata.email = email
             pdata.psw = psw
 
             pdata.save()
